@@ -16,10 +16,13 @@ int main()
     while (!WindowShouldClose())
     {
         ball.Update();
-        BeginDrawing();
+
         ClearBackground(darkGreen);
+
+        BeginDrawing();
     
         ball.Draw();
+        
         EndDrawing();
     }
 
