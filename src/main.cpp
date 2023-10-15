@@ -26,7 +26,7 @@ int main()
         ball.Update();
         player2.Update();
 
-//Check collision between a circle and a rectangle
+        //Check collision between a circle and a rectangle
         if (CheckCollisionCircleRec(Vector2{ball.positionX, ball.positionY}, ball.radius, Rectangle{player.positionX, player.positionY, player.width, player.height}))
             ball.velocityX *= -1;
         
@@ -53,7 +53,7 @@ int main()
         //Right side color
         DrawRectangle(screenWidth/2, 0, screenWidth/2, screenHeight, green);
 
-        // circle of the half court.
+        // circle for the half of the court.
         DrawCircle(screenWidth/2, screenHeight/2, 150, lightGreen);
 
         DrawLine(screenWidth /2, screenHeight, screenWidth / 2, 0, WHITE);

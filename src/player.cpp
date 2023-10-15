@@ -31,11 +31,9 @@ void Player::Update()
         if (IsKeyDown(KEY_DOWN) && positionY <= GetScreenHeight() - height)
             positionY += speed;
     }
-    
-    
 }
 
 void Player::Draw()
 {
-    DrawRectangle(positionX, positionY, width, height, WHITE);
+    DrawRectangleRounded(Rectangle{positionX, positionY, width, height}, 0.8, 0, WHITE);
 }
