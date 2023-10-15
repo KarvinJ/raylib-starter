@@ -1,13 +1,14 @@
 #include "player.h"
 #include <raylib.h>
 
-Player::Player(int x, int y, bool isPlayer1)
+Player::Player(float x, float y, bool isPlayer1)
 {
     positionX = x;
     positionY = y;
     width = 16;
     height = 64;
-    speed = 5;
+    speed = 8;
+    score = 0;
     this->isPlayer1 = isPlayer1;
 }
 

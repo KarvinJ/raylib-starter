@@ -3,14 +3,15 @@
 class Ball
 {
 public:
-    Ball();
+    Ball(float x, float y);
+    void ResetPosition();
     void Update();
     void Draw();
 
-private:
-    int x;
-    int y;
-    int speedX;
-    int speedY;
+public:
+    float positionX;
+    float positionY;
+    int velocityX;
+    int velocityY;
     int radius;
 };

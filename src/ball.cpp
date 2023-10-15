@@ -1,28 +1,34 @@
 #include "ball.h"
 #include <raylib.h>
 
-Ball::Ball()
+Ball::Ball(float x, float y)
 {
-    x = 100;
-    y = 100;
-    speedX = 5;
-    speedY = 5;
+    positionX = x;
+    positionY = y;
+    velocityX = 5;
+    velocityY = 5;
     radius = 15;
+}
+
+void Ball::ResetPosition()
+{
+    positionX = 960 / 2;
+    positionY = 640 / 2;
+
+    velocityX *= -1;
+    velocityY *= -1;
 }
 
 void Ball::Update()
 {
-    x += speedX;
-    y += speedY;
+    positionX += velocityX;
+    positionY += velocityY;
 
-    if (x + radius >= GetScreenWidth() || x - radius <= 0)
-        speedX *= -1;
-
-    if (y + radius >= GetScreenHeight() || y - radius <= 0)
-        speedY *= -1;
+    if (positionY + radius >= GetScreenHeight() || positionY - radius <= 0)
+        velocityY *= -1;
 }
 
 void Ball::Draw()
 {
-    DrawCircle(x, y, radius, WHITE);
+    DrawCircle(positionX, positionY, radius, YELLOW);
 }

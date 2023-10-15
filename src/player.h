@@ -3,15 +3,16 @@
 class Player
 {
 public:
-    Player(int x, int y, bool isPlayer1);
+    Player(float x, float y, bool isPlayer1);
     void Update();
     void Draw();
 
-private:
-    int positionX;
-    int positionY;
-    int width;
-    int height;
+public:
+    float positionX;
+    float positionY;
+    float width;
+    float height;
     int speed;
+    int score;
     bool isPlayer1;
 };
