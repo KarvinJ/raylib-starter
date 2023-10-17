@@ -31,8 +31,8 @@ int main()
 
     while (!WindowShouldClose())
     {
-
         UpdateMusicStream(music);
+
         player.Update();
         ball.Update();
         player2.Update();
@@ -66,7 +66,6 @@ int main()
             ball.ResetPosition();
         }
         
-
         ClearBackground(darkGreen);
 
         BeginDrawing();
