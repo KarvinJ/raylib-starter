@@ -66,27 +66,27 @@ int main()
             ball.ResetPosition();
         }
         
-        ClearBackground(darkGreen);
-
         BeginDrawing();
 
-        //Right side color
-        DrawRectangle(screenWidth/2, 0, screenWidth/2, screenHeight, green);
+            ClearBackground(darkGreen);
 
-        // circle for the half of the court.
-        DrawCircle(screenWidth/2, screenHeight/2, 150, lightGreen);
+            //Right side color
+            DrawRectangle(screenWidth/2, 0, screenWidth/2, screenHeight, green);
 
-        DrawLine(screenWidth /2, screenHeight, screenWidth / 2, 0, WHITE);
+            // circle for the half of the court.
+            DrawCircle(screenWidth/2, screenHeight/2, 150, lightGreen);
 
-        DrawText(TextFormat("%i", player.score), 230, 20, 80, WHITE);
+            DrawLine(screenWidth /2, screenHeight, screenWidth / 2, 0, WHITE);
 
-        DrawText(TextFormat("%i", player2.score), screenWidth - 250, 20, 80, WHITE);
+            DrawText(TextFormat("%i", player.score), 230, 20, 80, WHITE);
 
-        player.Draw();
+            DrawText(TextFormat("%i", player2.score), screenWidth - 250, 20, 80, WHITE);
+
+            player.Draw();
     
-        ball.Draw();
+            ball.Draw();
 
-        player2.Draw();
+            player2.Draw();
 
         EndDrawing();
     }
