@@ -20,18 +20,39 @@ int main()
 
     Player player2 = Player(screenWidth -26, screenHeight / 2, false);
 
+    InitAudioDevice();      // Initialize audio device, before declaring sound to play
+
+    Sound hitSound = LoadSound("assets/sounds/okay.wav");
+    Music music = LoadMusicStream("assets/music/pixel3.mp3");
+
+    music.looping = false;
+
+    PlayMusicStream(music);
+
     while (!WindowShouldClose())
     {
+
+        UpdateMusicStream(music);
         player.Update();
         ball.Update();
         player2.Update();
 
+        Vector2 ballPosition = Vector2{ball.positionX, ball.positionY};
+
+        Rectangle playerBounds = Rectangle{player.positionX, player.positionY, player.width, player.height};
+        Rectangle player2Bounds = Rectangle{player2.positionX, player2.positionY, player2.width, player2.height};
+
         //Check collision between a circle and a rectangle
-        if (CheckCollisionCircleRec(Vector2{ball.positionX, ball.positionY}, ball.radius, Rectangle{player.positionX, player.positionY, player.width, player.height}))
+        if (CheckCollisionCircleRec(ballPosition, ball.radius, playerBounds)) 
+        {
             ball.velocityX *= -1;
+            PlaySound(hitSound);
+        }
         
-        if (CheckCollisionCircleRec(Vector2{ball.positionX, ball.positionY}, ball.radius, Rectangle{player2.positionX, player2.positionY, player2.width, player2.height}))
+        if (CheckCollisionCircleRec(ballPosition, ball.radius, player2Bounds)) {
             ball.velocityX *= -1;
+            PlaySound(hitSound);
+        }
 
         if (ball.positionX > 960)
         {
@@ -70,6 +91,11 @@ int main()
 
         EndDrawing();
     }
+
+    UnloadSound(hitSound);     // Unload sound data
+    UnloadMusicStream(music);
+
+    CloseAudioDevice();     
 
     CloseWindow();
     return 0;
