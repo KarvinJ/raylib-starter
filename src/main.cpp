@@ -25,7 +25,7 @@ int main()
     Sound hitSound = LoadSound("assets/sounds/okay.wav");
     Music music = LoadMusicStream("assets/music/pixel3.mp3");
 
-    music.looping = false;
+    music.looping = true;
 
     PlayMusicStream(music);
 
@@ -91,7 +91,8 @@ int main()
         EndDrawing();
     }
 
-    UnloadSound(hitSound);     // Unload sound data
+    // Unload sound data
+    UnloadSound(hitSound);     
     UnloadMusicStream(music);
 
     CloseAudioDevice();     

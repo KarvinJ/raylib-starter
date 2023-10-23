@@ -12,8 +12,8 @@ Ball::Ball(float x, float y)
 
 void Ball::ResetPosition()
 {
-    positionX = 960 / 2;
-    positionY = 640 / 2;
+    positionX = GetScreenWidth() / 2;
+    positionY = GetScreenHeight() / 2;
 
     velocityX *= -1;
     velocityY *= -1;
