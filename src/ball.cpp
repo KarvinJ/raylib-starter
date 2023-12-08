@@ -1,34 +1,37 @@
 #include "ball.h"
 #include <raylib.h>
 
-Ball::Ball(float x, float y)
+Ball::Ball(float positionX, float positionY)
 {
-    positionX = x;
-    positionY = y;
-    velocityX = 5;
-    velocityY = 5;
+    position = Vector2{positionX, positionY};
+    velocity = Vector2{5, 5};
     radius = 15;
 }
 
 void Ball::ResetPosition()
 {
-    positionX = GetScreenWidth() / 2;
-    positionY = GetScreenHeight() / 2;
+    position.x = GetScreenWidth() / 2;
+    position.y = GetScreenHeight() / 2;
 
-    velocityX *= -1;
-    velocityY *= -1;
+    velocity.x *= -1;
+    velocity.y *= -1;
 }
 
 void Ball::Update()
 {
-    positionX += velocityX;
-    positionY += velocityY;
+    position.x += velocity.x;
+    position.y += velocity.y;
 
-    if (positionY + radius >= GetScreenHeight() || positionY - radius <= 0)
-        velocityY *= -1;
+    if (position.y + radius >= GetScreenHeight() || position.y - radius <= 0)
+        velocity.y *= -1;
 }
 
 void Ball::Draw()
 {
-    DrawCircle(positionX, positionY, radius, YELLOW);
+    DrawCircle(position.x, position.y, radius, YELLOW);
+}
+
+bool Ball::HasCollideWithPlayer(Rectangle playerBounds)
+{
+    return CheckCollisionCircleRec(position, radius, playerBounds);
 }

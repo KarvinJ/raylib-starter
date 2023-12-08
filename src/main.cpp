@@ -37,30 +37,20 @@ int main()
         ball.Update();
         player2.Update();
 
-        Vector2 ballPosition = Vector2{ball.positionX, ball.positionY};
-
-        Rectangle playerBounds = Rectangle{player.positionX, player.positionY, player.width, player.height};
-        Rectangle player2Bounds = Rectangle{player2.positionX, player2.positionY, player2.width, player2.height};
-
         //Check collision between a circle and a rectangle
-        if (CheckCollisionCircleRec(ballPosition, ball.radius, playerBounds)) 
+        if (ball.HasCollideWithPlayer(player.bounds) || ball.HasCollideWithPlayer(player2.bounds)) 
         {
-            ball.velocityX *= -1;
-            PlaySound(hitSound);
-        }
-        
-        if (CheckCollisionCircleRec(ballPosition, ball.radius, player2Bounds)) {
-            ball.velocityX *= -1;
+            ball.velocity.x *= -1;
             PlaySound(hitSound);
         }
 
-        if (ball.positionX > 960)
+        if (ball.position.x > 960)
         {
             player.score++;
             ball.ResetPosition();
         }
 
-        else if (ball.positionX < 0)
+        else if (ball.position.x < 0)
         {
             player2.score++;
             ball.ResetPosition();
