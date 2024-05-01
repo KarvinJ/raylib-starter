@@ -20,7 +20,7 @@ int main()
 
     Player player2 = Player(screenWidth -26, screenHeight / 2, false);
 
-    InitAudioDevice();      // Initialize audio device, before declaring sound to play
+    InitAudioDevice();      // Initialize audio device, before loading sound and music.
 
     Sound hitSound = LoadSound("assets/sounds/okay.wav");
     Music music = LoadMusicStream("assets/music/pixel3.mp3");
