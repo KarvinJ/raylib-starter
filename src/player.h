@@ -6,7 +6,7 @@ class Player
 {
 public:
     Player(float positionX, float positionY, bool isPlayer1);
-    void Update();
+    void Update(float deltaTime);
     void Draw();
 
 public:

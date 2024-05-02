@@ -12,7 +12,7 @@ int main()
     const int screenHeight = 640;
 
     InitWindow(screenWidth, screenHeight, "Pong!");
-    SetTargetFPS(60);
+    SetTargetFPS(144);
 
     Player player = Player(10, screenHeight / 2, true);
 
@@ -33,9 +33,11 @@ int main()
     {
         UpdateMusicStream(music);
 
-        player.Update();
-        ball.Update();
-        player2.Update();
+        float deltaTime = GetFrameTime();
+
+        player.Update(deltaTime);
+        ball.Update(deltaTime);
+        player2.Update(deltaTime);
 
         //Check collision between a circle and a rectangle
         if (ball.HasCollideWithPlayer(player.bounds) || ball.HasCollideWithPlayer(player2.bounds)) 

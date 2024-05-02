@@ -4,7 +4,7 @@
 Ball::Ball(float positionX, float positionY)
 {
     position = Vector2{positionX, positionY};
-    velocity = Vector2{5, 5};
+    velocity = Vector2{400, 400};
     radius = 15;
 }
 
@@ -17,10 +17,10 @@ void Ball::ResetPosition()
     velocity.y *= -1;
 }
 
-void Ball::Update()
+void Ball::Update(float deltaTime)
 {
-    position.x += velocity.x;
-    position.y += velocity.y;
+    position.x += velocity.x * deltaTime;
+    position.y += velocity.y * deltaTime;
 
     if (position.y + radius >= GetScreenHeight() || position.y - radius <= 0)
         velocity.y *= -1;

@@ -7,7 +7,7 @@ class Ball
 public:
     Ball(float positionX, float positionY);
     void ResetPosition();
-    void Update();
+    void Update(float deltaTime);
     void Draw();
     bool HasCollideWithPlayer(Rectangle playerBounds);
 
