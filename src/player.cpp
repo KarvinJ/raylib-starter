@@ -19,8 +19,9 @@ void Player::Update(float deltaTime)
         if (IsKeyDown(KEY_S) && bounds.y <= GetScreenHeight() - bounds.height)
             bounds.y += speed * deltaTime;
     }
-    else{
-
+    
+    else
+    {
         if (IsKeyDown(KEY_UP) && bounds.y >= 0)
             bounds.y -= speed * deltaTime;
 
