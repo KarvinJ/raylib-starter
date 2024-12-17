@@ -4,6 +4,7 @@
 typedef struct
 {
     Rectangle bounds;
+    Texture2D sprite;
     int speed;
     int score;
 } Player;
@@ -13,10 +14,11 @@ int main()
     const int SCREEN_WIDTH = 960;
     const int SCREEN_HEIGHT = 640;
 
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pong!");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Starter");
     SetTargetFPS(144);
 
-    Player player = {{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 32, 32}, 600, 0};
+    Texture2D sprite = LoadTexture("assets/img/alien.png");
+    Player player = {{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 32, 32}, sprite, 600, 0};
 
     Ball ball = Ball(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
@@ -62,6 +64,8 @@ int main()
         {
             ball.velocity.x *= -1;
             ball.velocity.y *= -1;
+
+            player.score++;
             
             PlaySound(hitSound);
         }
@@ -72,7 +76,8 @@ int main()
 
         DrawText(TextFormat("%i", player.score), 230, 20, 80, WHITE);
 
-        DrawRectangleRec(player.bounds, WHITE);
+        DrawTexture(player.sprite, player.bounds.x, player.bounds.y, WHITE);
+        // DrawRectangleRec(player.bounds, WHITE);
 
         ball.Draw();
 
