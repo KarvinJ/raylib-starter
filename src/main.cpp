@@ -1,6 +1,12 @@
 #include <raylib.h>
 #include "ball.h"
-#include "player.h"
+
+typedef struct
+{
+    Rectangle bounds;
+    int speed;
+    int score;
+} Player;
 
 int main()
 {
@@ -10,7 +16,7 @@ int main()
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pong!");
     SetTargetFPS(144);
 
-    Player player = Player(10, SCREEN_HEIGHT / 2);
+    Player player = {{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 32, 32}, 600, 0};
 
     Ball ball = Ball(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
@@ -29,13 +35,34 @@ int main()
 
         float deltaTime = GetFrameTime();
 
-        player.Update(deltaTime);
+        if (IsKeyDown(KEY_W) && player.bounds.y >= 0)
+        {
+            player.bounds.y -= player.speed * deltaTime;
+        }
+
+        else if (IsKeyDown(KEY_S) && player.bounds.y <= SCREEN_HEIGHT - player.bounds.height)
+        {
+            player.bounds.y += player.speed * deltaTime;
+        }
+
+        else if (IsKeyDown(KEY_D) && player.bounds.x <= SCREEN_WIDTH - player.bounds.width)
+        {
+            player.bounds.x += player.speed * deltaTime;
+        }
+
+        else if (IsKeyDown(KEY_A) && player.bounds.x > 0)
+        {
+            player.bounds.x -= player.speed * deltaTime;
+        }
+
         ball.Update(deltaTime);
 
         // Check collision between a circle and a rectangle
-        if (ball.HasCollideWithPlayer(player.bounds))
+        if (CheckCollisionCircleRec(ball.position, ball.radius, player.bounds))
         {
             ball.velocity.x *= -1;
+            ball.velocity.y *= -1;
+            
             PlaySound(hitSound);
         }
 
@@ -45,7 +72,7 @@ int main()
 
         DrawText(TextFormat("%i", player.score), 230, 20, 80, WHITE);
 
-        player.Draw();
+        DrawRectangleRec(player.bounds, WHITE);
 
         ball.Draw();
 
