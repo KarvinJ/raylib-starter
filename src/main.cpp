@@ -121,6 +121,7 @@ int main()
         if (IsKeyPressed(KEY_SPACE))
         {
             isGamePaused = !isGamePaused;
+            PlaySound(hitSound);
         }
 
         if (!isGamePaused)
