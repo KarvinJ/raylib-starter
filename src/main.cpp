@@ -20,7 +20,10 @@ typedef struct
     int radius;
 } Ball;
 
-Ball ball;
+Rectangle ball = {SCREEN_WIDTH / 2 + 50, SCREEN_HEIGHT / 2, 32, 32};
+
+int ballVelocityX = 300;
+int ballVelocityY = 300;
 
 bool isGamePaused;
 
@@ -48,29 +51,29 @@ void update(float deltaTime)
         player.bounds.x -= player.speed * deltaTime;
     }
 
-    if (ball.position.y + ball.radius >= SCREEN_HEIGHT || ball.position.y - ball.radius <= 0)
-    {
-        ball.velocity.y *= -1;
-    }
+    if (ball.x < 0 || ball.x > SCREEN_WIDTH - ball.width)
+	{
+		ballVelocityX *= -1;
+	}
 
-    if (ball.position.x + ball.radius >= SCREEN_WIDTH || ball.position.x - ball.radius <= 0)
-    {
-        ball.velocity.x *= -1;
-    }
+	else if (ball.y < 0 || ball.y > SCREEN_HEIGHT - ball.height)
+	{
+		ballVelocityY *= -1;
+	}
 
-    // Check collision between a circle and a rectangle
-    if (CheckCollisionCircleRec(ball.position, ball.radius, player.bounds))
+    // Check collision between a two rectangles.
+    if (CheckCollisionRecs(ball, player.bounds))
     {
-        ball.velocity.x *= -1;
-        ball.velocity.y *= -1;
+        ballVelocityX *= -1;
+		ballVelocityY *= -1;
 
         player.score++;
 
         PlaySound(hitSound);
     }
 
-    ball.position.x += ball.velocity.x * deltaTime;
-    ball.position.y += ball.velocity.y * deltaTime;
+    ball.x += ballVelocityX * deltaTime;
+    ball.y += ballVelocityY * deltaTime;
 }
 
 void draw()
@@ -83,7 +86,7 @@ void draw()
 
     DrawTexture(player.sprite, player.bounds.x, player.bounds.y, WHITE);
 
-    DrawCircleV(ball.position, ball.radius, YELLOW);
+    DrawRectangleRec(ball, WHITE);
 
     if (isGamePaused)
     {
@@ -96,12 +99,10 @@ void draw()
 int main()
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Starter");
-    SetTargetFPS(144);
+    SetTargetFPS(60);
 
     Texture2D sprite = LoadTexture("assets/img/alien.png");
     player = {{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, (float)sprite.width, (float)sprite.height}, sprite, 600, 0};
-
-    ball = {{SCREEN_WIDTH / 2 + 60, SCREEN_HEIGHT / 2}, {500, 500}, 15};
 
     InitAudioDevice(); // Initialize audio device, before loading sound and music.
 
