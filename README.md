@@ -1,4 +1,4 @@
-# Raylib-CPP-Starter-Template-for-VSCODE-V2
+# Raylib-Starter
 
 # How to use this template
 1. From the Explorer Window of VS Code navigate to the src folder and double click on the main.cpp file.
