@@ -1,4 +1,7 @@
 *.exe
 *.dsym
-main
+*.html
+*.js
+*.wasm
+*.data
 /.vscode
